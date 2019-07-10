@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'activity/login_page.dart';
+import 'package:yh_lwgl/activity/login/login_page.dart';
 import 'activity/main_page.dart';
 
 void main() => runApp(MyApp());

@@ -1,24 +1,31 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:yh_lwgl/base/BaseWidget.dart';
-import 'package:yh_lwgl/myhttp/requestUtil.dart';
-import 'package:yh_lwgl/model/login_model_entity.dart';
-import 'package:yh_lwgl/myhttp/showloading_intercept.dart';
+import 'package:yh_lwgl/model/count_entity.dart';
+import 'package:yh_lwgl/model/login_entity.dart';
+import 'package:yh_lwgl/mvp/base_page_state.dart';
+import 'package:yh_lwgl/net/dio_utils.dart';
+import 'package:yh_lwgl/presenter/login_presenter.dart';
 
-class IoginPage extends BaseWidget {
+class IoginPage extends StatefulWidget {
   @override
-  _loginPage getState()=>_loginPage();
+  LoginState createState() => LoginState();
 }
 
-class _loginPage extends BaseWidgetState<IoginPage> {
+class LoginState extends State<IoginPage>{//
 
   final _formKey = GlobalKey<FormState>();
   String _email, _password;
   bool _isObscure = true;
   Color _eyeColor;
 
+  void setImg(String title){
+    setState(() {
+      print("测试$title");
+    });
+  }
+
   @override
-  Widget buildWidget(BuildContext context) {
+  Widget build(BuildContext context) {
     // TODO: implement buildWidget
     return Scaffold(
         body: Form(
@@ -46,20 +53,6 @@ class _loginPage extends BaseWidgetState<IoginPage> {
     );
   }
 
-  @override
-  void onCreate() {
-    // TODO: implement onCreate
-  }
-
-  @override
-  void onPause() {
-    // TODO: implement onPause
-  }
-
-  @override
-  void onResume() {
-    // TODO: implement onResume
-  }
 
   Align buildRegisterText(BuildContext context) {
     return Align(
@@ -113,17 +106,8 @@ class _loginPage extends BaseWidgetState<IoginPage> {
               _formKey.currentState.save();
               //TODO 执行登录方法
               print('email:$_email , assword:$_password');
-//
-//              RequestMap.requestLogin(ShowLoadingIntercept(this)).listen((da) {
-//
-//
-//              }, onError: (err) {
-//                log("errrr----${err.toString()}-- ");
-//              });
+              login();
 
-              Dio dio = new Dio();
-              Response response=await dio.get("http://47.106.183.18:8080");
-              print(response.data);
             }
           },
         ),
@@ -214,5 +198,39 @@ class _loginPage extends BaseWidgetState<IoginPage> {
         style: TextStyle(fontSize: 42.0),
       ),
     );
+  }
+
+  @override
+  LoginPresenter createPresenter() {
+    // TODO: implement createPresenter
+    return LoginPresenter();
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+
+  void login(){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      /// 接口请求例子
+      /// get请求参数queryParameters  post请求参数params
+
+
+      FormData formData = new FormData.from({
+        "projId": "12",
+        "staffId": "1170",
+        "roleKind": "4",
+      });
+      DioUtils.instance.requestNetwork<CountData>(Method.post, "app/lwry/lwryCount", params: formData, onSuccess: (data) {
+            print(data.hmds);
+
+          }, onSuccessList: (data) {
+            print(data[0].hmds);
+          }, onError: (code, msg) {
+            print("code$code");
+            print("msg$msg");
+          });
+    });
   }
 }
