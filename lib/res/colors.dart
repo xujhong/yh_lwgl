@@ -16,5 +16,7 @@ class Colours {
   
   static const Color login_text_disabled = Color(0xFFD4E2FA);
   static const Color login_button_disabled = Color(0xFF96BBFA);
+  static const Color color_0xFFFFFFFF=Color(0xFFFFFFFF);
+  static const Color color_blue=Colors.blue;
 }
 

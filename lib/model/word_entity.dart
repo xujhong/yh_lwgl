@@ -1,0 +1,112 @@
+
+class WordData {
+	dynamic modifiedTime;
+	String ispdfFlag;
+	dynamic modifiedStaffName;
+	String zdhbIcon;
+	dynamic statusStr;
+	dynamic organNo;
+	String zdhbUploder;
+	dynamic fjwjBmid;
+	String zdhbName;
+	String deleteFlag;
+	dynamic currentUserId;
+	String staffName;
+	String createdTime;
+	String realPath;
+	dynamic enterpriseName;
+	dynamic fjwjYwjms;
+	dynamic zdhbTypeStr;
+	int createdStaffId;
+	dynamic modifiedStaffId;
+	dynamic keyName;
+	dynamic fjwjBms;
+	String fjwjWjms;
+	dynamic uploadTime;
+	String fjwjFwdzs;
+	dynamic createdStaffName;
+	dynamic deletedFlag;
+	dynamic fjwjIds;
+	dynamic projectName;
+	int zdhbStatus;
+	String zdhbType;
+	dynamic staffId;
+	int zdhbId;
+	String status;
+
+	WordData({this.modifiedTime, this.ispdfFlag, this.modifiedStaffName, this.zdhbIcon, this.statusStr, this.organNo, this.zdhbUploder, this.fjwjBmid, this.zdhbName, this.deleteFlag, this.currentUserId, this.staffName, this.createdTime, this.realPath, this.enterpriseName, this.fjwjYwjms, this.zdhbTypeStr, this.createdStaffId, this.modifiedStaffId, this.keyName, this.fjwjBms, this.fjwjWjms, this.uploadTime, this.fjwjFwdzs, this.createdStaffName, this.deletedFlag, this.fjwjIds, this.projectName, this.zdhbStatus, this.zdhbType, this.staffId, this.zdhbId, this.status});
+
+	WordData.fromJson(Map<String, dynamic> json) {
+		modifiedTime = json['modifiedTime'];
+		ispdfFlag = json['ispdfFlag'];
+		modifiedStaffName = json['modifiedStaffName'];
+		zdhbIcon = json['zdhbIcon'];
+		statusStr = json['statusStr'];
+		organNo = json['organNo'];
+		zdhbUploder = json['zdhbUploder'];
+		fjwjBmid = json['fjwjBmid'];
+		zdhbName = json['zdhbName'];
+		deleteFlag = json['deleteFlag'];
+		currentUserId = json['currentUserId'];
+		staffName = json['staffName'];
+		createdTime = json['createdTime'];
+		realPath = json['realPath'];
+		enterpriseName = json['enterpriseName'];
+		fjwjYwjms = json['fjwjYwjms'];
+		zdhbTypeStr = json['zdhbTypeStr'];
+		createdStaffId = json['createdStaffId'];
+		modifiedStaffId = json['modifiedStaffId'];
+		keyName = json['keyName'];
+		fjwjBms = json['fjwjBms'];
+		fjwjWjms = json['fjwjWjms'];
+		uploadTime = json['uploadTime'];
+		fjwjFwdzs = json['fjwjFwdzs'];
+		createdStaffName = json['createdStaffName'];
+		deletedFlag = json['deletedFlag'];
+		fjwjIds = json['fjwjIds'];
+		projectName = json['projectName'];
+		zdhbStatus = json['zdhbStatus'];
+		zdhbType = json['zdhbType'];
+		staffId = json['staffId'];
+		zdhbId = json['zdhbId'];
+		status = json['status'];
+	}
+
+	Map<String, dynamic> toJson() {
+		final Map<String, dynamic> data = new Map<String, dynamic>();
+		data['modifiedTime'] = this.modifiedTime;
+		data['ispdfFlag'] = this.ispdfFlag;
+		data['modifiedStaffName'] = this.modifiedStaffName;
+		data['zdhbIcon'] = this.zdhbIcon;
+		data['statusStr'] = this.statusStr;
+		data['organNo'] = this.organNo;
+		data['zdhbUploder'] = this.zdhbUploder;
+		data['fjwjBmid'] = this.fjwjBmid;
+		data['zdhbName'] = this.zdhbName;
+		data['deleteFlag'] = this.deleteFlag;
+		data['currentUserId'] = this.currentUserId;
+		data['staffName'] = this.staffName;
+		data['createdTime'] = this.createdTime;
+		data['realPath'] = this.realPath;
+		data['enterpriseName'] = this.enterpriseName;
+		data['fjwjYwjms'] = this.fjwjYwjms;
+		data['zdhbTypeStr'] = this.zdhbTypeStr;
+		data['createdStaffId'] = this.createdStaffId;
+		data['modifiedStaffId'] = this.modifiedStaffId;
+		data['keyName'] = this.keyName;
+		data['fjwjBms'] = this.fjwjBms;
+		data['fjwjWjms'] = this.fjwjWjms;
+		data['uploadTime'] = this.uploadTime;
+		data['fjwjFwdzs'] = this.fjwjFwdzs;
+		data['createdStaffName'] = this.createdStaffName;
+		data['deletedFlag'] = this.deletedFlag;
+		data['fjwjIds'] = this.fjwjIds;
+		data['projectName'] = this.projectName;
+		data['zdhbStatus'] = this.zdhbStatus;
+		data['zdhbType'] = this.zdhbType;
+		data['staffId'] = this.staffId;
+		data['zdhbId'] = this.zdhbId;
+		data['status'] = this.status;
+		return data;
+	}
+}
