@@ -8,6 +8,7 @@ import 'package:yh_lwgl/utils/toast.dart';
 import '../entity_factory.dart';
 import 'base_entity.dart';
 import 'error_handle.dart';
+import 'intercept.dart';
 
 /// @weilu https://github.com/simplezhli
 class DioUtils {
@@ -30,14 +31,33 @@ class DioUtils {
       connectTimeout: 15000,
       receiveTimeout: 15000,
       responseType: ResponseType.plain,
+      maxRedirects: 4,
       validateStatus: (status) {
         // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
         return true;
       },
-      baseUrl: "http://47.106.183.18:8080/xmgsxm/",
+      baseUrl: "http://hout.quntongbu.com/Api/User/",
 //      contentType: ContentType('application', 'x-www-form-urlencoded', charset: 'utf-8'),
     );
     dio = Dio(options);
+
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        // config the http client
+        client.findProxy = (uri) {
+          //proxy all request to localhost:8888
+          return "PROXY 192.168.0.211:8888";
+        };
+        // you can also create a new HttpClient to dio
+        // return new HttpClient();
+      };
+
+    /// 统一添加身份验证请求头
+    dio.interceptors.add(AuthInterceptor());
+    /// 刷新Token
+    dio.interceptors.add(TokenInterceptor());
+    /// 打印Log
+    dio.interceptors.add(LoggingInterceptor());
   }
 
   // 数据返回格式统一，统一处理异常
