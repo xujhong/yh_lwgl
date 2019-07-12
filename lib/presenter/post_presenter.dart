@@ -22,16 +22,18 @@ class LoginPresenter {
       });
 
       Map<String, String> map = {
-        "username": "yz",
-        "password": "6v9m#123",
-        "clientType": "app",
+        "username": "xmgs",
+        "password": "1#123",
+        "clientType": "android",
+        "registrationType": "android",
+        "registrationId": "190e35f7e00e833ef99",
       };
 
       DioUtils.instance.requestNetwork<LoginData>(Method.put, "login",
-          queryParameters: formData, onSuccess: (data) {
-        print(data.createTime);
+          params: map, onSuccess: (data) {
+        print(data.staffName);
       }, onSuccessList: (data) {
-        print(data[0].createTime);
+        print(data[0].staffName);
       }, onError: (code, msg) {
         print("code$code");
         print("msg$msg");

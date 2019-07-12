@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:rxdart/rxdart.dart';
@@ -31,12 +32,13 @@ class DioUtils {
       connectTimeout: 15000,
       receiveTimeout: 15000,
       responseType: ResponseType.plain,
+      contentType: ContentType.parse("application/x-www-form-urlencoded"),
       maxRedirects: 4,
       validateStatus: (status) {
         // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
         return true;
       },
-      baseUrl: "http://hout.quntongbu.com/Api/User/",
+      baseUrl: "http://47.106.183.18:8080/xmgsxm/",
 //      contentType: ContentType('application', 'x-www-form-urlencoded', charset: 'utf-8'),
     );
     dio = Dio(options);

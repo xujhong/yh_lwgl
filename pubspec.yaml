@@ -41,6 +41,8 @@ dependencies:
   url_launcher: 5.0.2
   #状态管理
   redux: "^3.0.0"
+  # 图片缓存 https://github.com/renefloor/flutter_cached_network_image
+  cached_network_image: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +86,7 @@ flutter:
      - assets/images/img_danger_manage.png
      - assets/images/img_text_manage_system.png
      - assets/images/img_text_manage_search.png
+     - assets/images/ic_save_file.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
