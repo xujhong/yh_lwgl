@@ -85,6 +85,24 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.10"
+  flare_dart:
+    dependency: transitive
+    description:
+      path: flare_dart
+      ref: master
+      resolved-ref: c7a59c9cff8887abb89f2c36b3911f5fbdf189c8
+      url: "git://github.com/CarSmallGuo/Flare-Flutter.git"
+    source: git
+    version: "1.4.1"
+  flare_flutter:
+    dependency: "direct main"
+    description:
+      path: flare_flutter
+      ref: c7a59c9cff8887abb89f2c36b3911f5fbdf189c8
+      resolved-ref: c7a59c9cff8887abb89f2c36b3911f5fbdf189c8
+      url: "https://github.com/CarSmallGuo/Flare-Flutter.git"
+    source: git
+    version: "1.5.1"
   fluro:
     dependency: "direct main"
     description:
@@ -111,6 +129,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

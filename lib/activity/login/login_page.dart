@@ -103,7 +103,7 @@ class LoginState extends State<IoginPage>{//
               //TODO 执行登录方法
               print('email:$_email , assword:$_password');
 
-              LoginPresenter().login(_email,_password);
+//              LoginPresenter().login(_email,_password);
             }
           },
         ),

@@ -29,6 +29,6 @@ class CardItem extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(4.0)));
     color ??= Colours.color_0xFFFFFFFF;
 
-    return Card(elevation: elevation,shape: shape,color: color,margin: margin,child: child);
+    return Card(elevation: elevation,shape: shape,color: color,margin: margin,child: child,);
   }
 }

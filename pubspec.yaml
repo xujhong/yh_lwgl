@@ -43,6 +43,15 @@ dependencies:
   redux: "^3.0.0"
   # 图片缓存 https://github.com/renefloor/flutter_cached_network_image
   cached_network_image: ^1.0.0
+  # listView 加载等待loading https://github.com/jogboms/flutter_spinkit
+  flutter_spinkit: ^3.1.0
+
+  #适量动画 https://github.com/CarSmallGuo/Flare-Flutter
+  flare_flutter:
+    git:
+      url: https://github.com/CarSmallGuo/Flare-Flutter.git
+      path: flare_flutter
+      ref: c7a59c9cff8887abb89f2c36b3911f5fbdf189c8
 
 dev_dependencies:
   flutter_test:

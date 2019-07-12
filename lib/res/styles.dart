@@ -77,6 +77,11 @@ class TextStyles {
     fontSize: Dimens.font_sp14,
     color: Colours.text_gray_c,
   );
+
+  static const normalText = TextStyle(
+    color: Colours.primaryDarkValue,
+    fontSize: Dimens.font_sp18,
+  );
 }
 
 /// 间隔
@@ -103,4 +108,8 @@ class Gaps {
   
   static Widget line = Container(height: 0.6, color: Colours.line);
   static const Widget empty = SizedBox();
+}
+
+class GSYICons{
+  static const String DEFAULT_USER_ICON = 'assets/images/logo.png';
 }
