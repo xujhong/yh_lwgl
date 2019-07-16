@@ -1,43 +1,18 @@
+class Log {
+  static bool openLog = true;
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-
-class Log{
-  
-  static const perform = const MethodChannel("x_log");
-  
-  static d(String msg, {tag: 'X-LOG'}) {
-    perform.invokeMethod('logD', {'tag': tag, 'msg': msg});
-    _print(msg);
-  }
-  
-  static w(String msg, {tag: 'X-LOG'}) {
-    perform.invokeMethod('logW', {'tag': tag, 'msg': msg});
-    _print(msg);
-  }
-  
-  static i(String msg, {tag: 'X-LOG'}) {
-    perform.invokeMethod('logI', {'tag': tag, 'msg': msg});
-    _print(msg);
-  }
-  
-  static e(String msg, {tag: 'X-LOG'}) {
-    perform.invokeMethod('logE', {'tag': tag, 'msg': msg});
-    _print(msg);
-  }
-  
-  static json(String msg, {tag: 'X-LOG'}) {
-    try {
-      perform.invokeMethod('logJson', {'tag': tag, 'msg': msg});
-      _print(msg);
-    } catch (e) {
-      d(msg);
-    }
-  }
-
-  static _print(String msg){
-    if (defaultTargetPlatform == TargetPlatform.iOS){
-      debugPrint(msg);
+  static void i(String msg) {
+    if (openLog) {
+      if (msg.length > 4000) {
+        for (int i = 0; i < msg.length; i += 4000) {
+          if (i + 4000 < msg.length)
+            print(msg.substring(i, i + 4000));
+          else
+            print(msg.substring(i, msg.length));
+        }
+      } else {
+        print(msg);
+      }
     }
   }
 }

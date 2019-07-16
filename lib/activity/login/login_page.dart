@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yh_lwgl/presenter/post_presenter.dart';
-
 class IoginPage extends StatefulWidget {
   @override
   LoginState createState() => LoginState();

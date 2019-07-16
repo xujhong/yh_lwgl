@@ -19,7 +19,7 @@ class WordItem extends StatelessWidget {
           child: FlatButton(
         onPressed: onPressed,
         child: Container(
-          height: 90.0,
+          height: 100.0,
           padding: const EdgeInsets.all(15.0),
           decoration: BoxDecoration(
               border: Border(

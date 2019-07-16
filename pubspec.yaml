@@ -26,7 +26,7 @@ dependencies:
   # Toast插件 https://github.com/OpenFlutter/flutter_oktoast
   oktoast: ^2.1.9
   # 网络库 https://github.com/flutterchina/dio
-  dio: ^2.1.10
+  dio: ^1.0.9
   # https://github.com/ReactiveX/rxdart
   rxdart: ^0.21.0
   # Dart 常用工具类库 https://github.com/Sky24n/common_utils
@@ -45,6 +45,8 @@ dependencies:
   cached_network_image: ^1.0.0
   # listView 加载等待loading https://github.com/jogboms/flutter_spinkit
   flutter_spinkit: ^3.1.0
+  #事件
+  event_bus: ^1.0.1
 
   #适量动画 https://github.com/CarSmallGuo/Flare-Flutter
   flare_flutter:
@@ -96,6 +98,7 @@ flutter:
      - assets/images/img_text_manage_system.png
      - assets/images/img_text_manage_search.png
      - assets/images/ic_save_file.png
+     - assets/images/ic_error.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
