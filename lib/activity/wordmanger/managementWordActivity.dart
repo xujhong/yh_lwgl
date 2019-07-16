@@ -10,7 +10,6 @@ class ManagementWordActivity extends StatefulWidget{
 class _managementWordActivityState extends State<ManagementWordActivity>{
 
   int pageIndex;
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
