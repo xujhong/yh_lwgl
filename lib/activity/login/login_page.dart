@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/common/common.dart';
+import 'package:yh_lwgl/model/base_dto.dart';
+import 'package:yh_lwgl/net/request.dart';
+import 'package:yh_lwgl/utils/sp_utils.dart';
+import 'package:yh_lwgl/widgets/common_utils.dart';
+import 'package:yh_lwgl/widgets/toast.dart';
+
 class IoginPage extends StatefulWidget {
   @override
   LoginState createState() => LoginState();
 }
 
-class LoginState extends State<IoginPage>{//
+class LoginState extends State<IoginPage> {
+  //
 
   final _formKey = GlobalKey<FormState>();
   String _email, _password;
   bool _isObscure = true;
   Color _eyeColor;
 
-  void setImg(String title){
+  void setImg(String title) {
     setState(() {
       print("测试$title");
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +50,8 @@ class LoginState extends State<IoginPage>{//
                 buildOtherLoginText(),
                 buildRegisterText(context),
               ],
-            ))
-    );
+            )));
   }
-
 
   Align buildRegisterText(BuildContext context) {
     return Align(
@@ -101,7 +106,7 @@ class LoginState extends State<IoginPage>{//
               //TODO 执行登录方法
               print('email:$_email , assword:$_password');
 
-//              LoginPresenter().login(_email,_password);
+              _login(_email, _password);
             }
           },
         ),
@@ -159,13 +164,13 @@ class LoginState extends State<IoginPage>{//
       decoration: InputDecoration(
         labelText: 'Emall Address',
       ),
-      validator: (String value) {
-        var emailReg = RegExp(
-            r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?");
-        if (!emailReg.hasMatch(value)) {
-          return '请输入正确的邮箱地址';
-        }
-      },
+//      validator: (String value) {
+//        var emailReg = RegExp(
+//            r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?");
+//        if (!emailReg.hasMatch(value)) {
+//          return '请输入正确的邮箱地址';
+//        }
+//      },
       onSaved: (String value) => _email = value,
     );
   }
@@ -194,4 +199,27 @@ class LoginState extends State<IoginPage>{//
     );
   }
 
+  //登录
+  _login(String name, String pwd) {
+    CommonUtils.showLoading(context);
+//    Request().login(name, pwd).then((result){
+//      Navigator.pop(context);
+//      Toast.show('登录成功');
+//
+//      print(result.toString());
+//
+//    }).catchError((onError){
+//      Navigator.pop(context);
+//      Toast.show(onError.message);
+//    });
+
+    Navigator.pop(context);
+    Toast.show('登录成功');
+    _setUser(Constant.userBean);
+  }
+
+  //保存个人信息
+  void _setUser(String user) async {
+    SpUtils.setString(Constant.spUserName, user);
+  }
 }

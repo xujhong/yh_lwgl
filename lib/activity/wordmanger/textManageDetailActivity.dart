@@ -59,17 +59,29 @@ class _textManageListActivity extends State<TextManageDetailActivity> {
             menus: wordMenus,
             callback: (Menu menu) {
               if (menu.channel == Constant.WORD_ONE) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TextManageListActivity()));
+              //制度汇编
+                Navigator.of(context)
+                    .push(new MaterialPageRoute<Null>(builder: (context) {
+                  return new TextManageListActivity(menuIndex:'1');
+                }));
               } else if (menu.channel == Constant.WORD_TWO) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TextManageListActivity()));
+                //知识库
+                Navigator.of(context)
+                    .push(new MaterialPageRoute<Null>(builder: (context) {
+                  return new TextManageListActivity(menuIndex: '2');
+                }));
               } else if (menu.channel == Constant.WORD_THREE) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TextManageListActivity()));
+                //法律法规
+                Navigator.of(context)
+                    .push(new MaterialPageRoute<Null>(builder: (context) {
+                  return new TextManageListActivity(menuIndex: '4');
+                }));
               } else if (menu.channel == Constant.WORD_FOUR) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TextManageListActivity()));
+                //综合查询
+                Navigator.of(context)
+                    .push(new MaterialPageRoute<Null>(builder: (context) {
+                  return new TextManageListActivity(menuIndex:'');
+                }));
               }
             },
           ),
@@ -79,7 +91,9 @@ class _textManageListActivity extends State<TextManageDetailActivity> {
           ),
           GridMenuView(
             menus: wordManage,
-            callback: (Menu) {},
+            callback: (Menu) {
+
+            },
           )
         ],
       ),

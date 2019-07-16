@@ -1,4 +1,4 @@
-import 'package:yh_lwgl/model/login_entity.dart';
+import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/net/requestimpl.dart';
 
@@ -21,5 +21,5 @@ abstract class Request {
 
 
   //登录
-  Future<LoginData> login(String username, String password);
+  Future<UserData> login(String username, String password);
 }

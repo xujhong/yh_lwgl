@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:yh_lwgl/utils/toast.dart';
+import 'package:yh_lwgl/widgets/toast.dart';
 
 class Utils {
   static String getImgPath(String name, {String format: 'png'}) {

@@ -6,7 +6,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/base_dto.dart';
-import 'package:yh_lwgl/model/login_entity.dart';
+import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/net/api.dart';
 import 'package:yh_lwgl/net/interceptor.dart';
@@ -75,10 +75,10 @@ class RequestImpl extends Request {
 
   //登录
   @override
-  Future<LoginData> login(String username, String password) async {
+  Future<UserData> login(String username, String password) async {
     Response response = await _dio.post(Api.login,
         data: FormData.from({'username': username, 'password': password}));
-    return LoginData.fromJson(_handleRes(response));
+    return UserData.fromJson(_handleRes(response));
   }
 
 

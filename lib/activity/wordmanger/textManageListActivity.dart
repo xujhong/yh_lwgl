@@ -3,13 +3,22 @@ import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/common/pagestatus.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/net/request.dart';
-import 'package:yh_lwgl/utils/toast.dart';
+import 'package:yh_lwgl/widgets/toast.dart';
 import 'package:yh_lwgl/widgets/error_view.dart';
 import 'package:yh_lwgl/widgets/loading.dart';
 import 'package:yh_lwgl/widgets/pullrefresh/pullrefresh.dart';
 import 'package:yh_lwgl/widgets/word_item.dart';
 
 class TextManageListActivity extends StatefulWidget {
+
+
+  const TextManageListActivity({
+    Key key,
+    @required this.menuIndex
+  }): super(key: key);
+
+  final String menuIndex;
+
   @override
   _TextManageListActivityState createState() => _TextManageListActivityState();
 }
@@ -36,19 +45,16 @@ class _TextManageListActivityState extends State<TextManageListActivity> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("制度汇编"),
+          title: title(),
         ),
         body: _buildBody());
   }
 
   //上拉加载更多数据
   _loadMore() async {
-    Request().getSubscriptions('1', index, '2145').then((data) {
+    Request().getSubscriptions(widget.menuIndex, index, '2145').then((data) {
       setState(() {
         //判断如果返回的数据长度没有达到达到一页则下一页没有数据
-
-
-
         if(isDataEmpty){
           _listDatas.addAll(data);
           index++;
@@ -64,7 +70,7 @@ class _TextManageListActivityState extends State<TextManageListActivity> {
   //下拉舒心数据
   _refresh() async {
     index = 1;
-    Request().getSubscriptions('1', index, '2145').then((data) {
+    Request().getSubscriptions(widget.menuIndex, index, '2145').then((data) {
       setState(() {
         //如果不足一页则下页没有数据
         _listDatas = data;
@@ -117,6 +123,20 @@ class _TextManageListActivityState extends State<TextManageListActivity> {
     return WordItem(item);
   }
 
+  Widget title(){
+    String titlename;
+    if(widget.menuIndex=='1'){
+      titlename='制度汇编';
+    }else if(widget.menuIndex=='2'){
+      titlename='知识库';
+    }else if(widget.menuIndex=='4'){
+      titlename='法律法规';
+    }else {
+      titlename='综合查询';
+    }
+
+    return Text(titlename);
+  }
 }
 
 

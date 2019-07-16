@@ -22,4 +22,11 @@ class Constant {
 
   //列表一页显示的条数
   static const int PAGE_SIZE = 20;
+  //保存的个人信息Key
+  static const spUserName = 'spUserName';
+
+  //模拟登录返回的数据
+  static const String userBean='{"staffId": 1130,"roleId": 53,"roleName": null,"staffName": "温永明","staffAcct": "cpsdjk","organId": 1242,"staffTel": "13233232102","roleKind": 8,"registrationId": "regId","clientType": "android"}';
+
+
 }

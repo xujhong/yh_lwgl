@@ -1,6 +1,6 @@
 
 
-class LoginData {
+class UserData {
 	int roleKind;
 	String clientType;
 	int roleId;
@@ -12,9 +12,9 @@ class LoginData {
 	int staffId;
 	String staffAcct;
 
-	LoginData({this.roleKind, this.clientType, this.roleId, this.staffTel, this.roleName, this.staffName, this.registrationId, this.organId, this.staffId, this.staffAcct});
+	UserData({this.roleKind, this.clientType, this.roleId, this.staffTel, this.roleName, this.staffName, this.registrationId, this.organId, this.staffId, this.staffAcct});
 
-	LoginData.fromJson(Map<String, dynamic> json) {
+	UserData.fromJson(Map<String, dynamic> json) {
 		roleKind = json['roleKind'];
 		clientType = json['clientType'];
 		roleId = json['roleId'];
