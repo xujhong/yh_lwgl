@@ -8,6 +8,7 @@ import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/base_dto.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
+import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
 import 'package:yh_lwgl/net/api.dart';
 import 'package:yh_lwgl/net/interceptor.dart';
 import 'package:yh_lwgl/net/request.dart';
@@ -59,7 +60,7 @@ class RequestImpl extends Request {
     }
   }
 
-  //获取公众号列表
+  //获取文档列表
   @override
   Future<List<WordData>> getSubscriptions(String zdhbType, int pageNum,String currentUserId) async {
     Response response = await _dio.post(Api.ajax_query_wdxx_list,
@@ -72,13 +73,26 @@ class RequestImpl extends Request {
   }
 
 
-
   //登录
   @override
   Future<UserData> login(String username, String password) async {
     Response response = await _dio.post(Api.login,
         data: FormData.from({'username': username, 'password': password}));
     return UserData.fromJson(_handleRes(response));
+  }
+
+
+  ///获取管理文件列表
+  @override
+  Future<List<WordGlwjxfData>> getAjax_query_glwjxf_list(String currentUserId, int pageNum)async {
+
+    Response response =await _dio.post(Api.ajax_query_glwjxf_list,data: FormData.from({'currentUserId':currentUserId,'pageNum':pageNum}));
+    List<WordGlwjxfData> data=new List<WordGlwjxfData>();
+
+    _handleRes(response).forEach((v) {
+      data.add(new WordGlwjxfData.fromJson(v));
+    });
+    return data;
   }
 
 

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/res/colors.dart';
 import 'package:yh_lwgl/res/styles.dart';
-
-import 'cardItem.dart';
-
+import 'package:yh_lwgl/widgets/cardItem.dart';
 class WordItem extends StatelessWidget {
   WordData _wordData;
   final VoidCallback onPressed;

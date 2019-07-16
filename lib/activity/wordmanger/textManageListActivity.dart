@@ -7,7 +7,7 @@ import 'package:yh_lwgl/widgets/toast.dart';
 import 'package:yh_lwgl/widgets/error_view.dart';
 import 'package:yh_lwgl/widgets/loading.dart';
 import 'package:yh_lwgl/widgets/pullrefresh/pullrefresh.dart';
-import 'package:yh_lwgl/widgets/word_item.dart';
+import 'package:yh_lwgl/widgets/worditem/word_item.dart';
 
 class TextManageListActivity extends StatefulWidget {
 
