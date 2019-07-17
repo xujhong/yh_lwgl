@@ -20,5 +20,11 @@ class Colours {
   static const Color color_blue=Colors.blue;
 
   static const Color primaryDarkValue = Color(0xFF121917);
+
+  ///文件管理颜色
+  static const Color text_yellow=Color.fromARGB(255, 255, 153, 51);
+  static const Color text_green=Color.fromARGB(255, 60, 189, 76);
+  static const Color text_text_6=Color.fromARGB(255, 102, 102, 102);
+
 }
 

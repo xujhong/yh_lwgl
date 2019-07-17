@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/activity/wordmanger/managementWordActivity.dart';
 import 'package:yh_lwgl/activity/wordmanger/textManageListActivity.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/grid_menu_view.dart';
@@ -92,7 +93,7 @@ class _textManageListActivity extends State<TextManageDetailActivity> {
           GridMenuView(
             menus: wordManage,
             callback: (Menu) {
-
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ManagementWordActivity()));
             },
           )
         ],

@@ -86,7 +86,7 @@ class RequestImpl extends Request {
   @override
   Future<List<WordGlwjxfData>> getAjax_query_glwjxf_list(String currentUserId, int pageNum)async {
 
-    Response response =await _dio.post(Api.ajax_query_glwjxf_list,data: FormData.from({'currentUserId':currentUserId,'pageNum':pageNum}));
+    Response response =await _dio.post(Api.ajax_query_glwjxf_list,data: FormData.from({'currentUserId':currentUserId,'pageNum':pageNum,'pageSize':Constant.PAGE_SIZE}));
     List<WordGlwjxfData> data=new List<WordGlwjxfData>();
 
     _handleRes(response).forEach((v) {
