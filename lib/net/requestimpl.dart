@@ -6,6 +6,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/base_dto.dart';
+import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
@@ -95,6 +96,13 @@ class RequestImpl extends Request {
     return data;
   }
 
-
+  ///管理文件详情
+  @override
+  Future<GlwjxfdatailData> getAjax_query_glwjxf_datail(String wjId) async{
+    // TODO: implement getAjax_query_glwjxf_datail
+    
+    Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
+    return GlwjxfdatailData.fromJson(_handleRes(response));
+  }
 
 }

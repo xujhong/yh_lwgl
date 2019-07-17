@@ -18,7 +18,7 @@ class WordItem extends StatelessWidget {
         onPressed: onPressed,
         child: Container(
           height: 100.0,
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           decoration: BoxDecoration(
               border: Border(
             bottom: Divider.createBorderSide(context,

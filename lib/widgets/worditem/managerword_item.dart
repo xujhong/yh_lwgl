@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/activity/wordmanger/managementWordInfoActivity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
 import 'package:yh_lwgl/res/colors.dart';
 import 'package:yh_lwgl/res/styles.dart';
@@ -7,9 +8,8 @@ import 'package:yh_lwgl/widgets/cardItem.dart';
 ///管理文件item
 class ManagerWordItem extends StatelessWidget {
   WordGlwjxfData _wordGlwjxfData;
-  final VoidCallback onPressed;
 
-  ManagerWordItem(this._wordGlwjxfData, {this.onPressed}) : super();
+  ManagerWordItem(this._wordGlwjxfData) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,13 @@ class ManagerWordItem extends StatelessWidget {
       height: 100.0,
       child: CardItem(
         child: FlatButton(
-            onPressed: onPressed,
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return ManagementWordInfoActivity(
+                  wordGlwjxfData: _wordGlwjxfData,
+                );
+              }));
+            },
             child: ListTile(
               title: Container(
                 padding: EdgeInsets.only(bottom: 10.0),
@@ -39,7 +45,8 @@ class ManagerWordItem extends StatelessWidget {
                   ),
                   Text(
                     _wordGlwjxfData.feedbackResultName,
-                    style: TextStyle(fontSize: 12.0,color: textColor(_wordGlwjxfData)),
+                    style: TextStyle(
+                        fontSize: 12.0, color: textColor(_wordGlwjxfData)),
                   ),
                 ],
               ),
@@ -48,20 +55,17 @@ class ManagerWordItem extends StatelessWidget {
     );
   }
 
-
-  Color textColor(WordGlwjxfData _wordGlwjxf){
-
-    if(_wordGlwjxf.feedbackResultName=='部分反馈'){
+  Color textColor(WordGlwjxfData _wordGlwjxf) {
+    if (_wordGlwjxf.feedbackResultName == '部分反馈') {
       return Colours.text_yellow;
-    }else if(_wordGlwjxf.feedbackResultName=='全部反馈'){
+    } else if (_wordGlwjxf.feedbackResultName == '全部反馈') {
       return Colours.text_green;
-    }else if(_wordGlwjxf.feedbackResultName=='未反馈'){
+    } else if (_wordGlwjxf.feedbackResultName == '未反馈') {
       return Colours.text_red;
-    }else if(_wordGlwjxf.feedbackResultName=='不需要反馈'){
+    } else if (_wordGlwjxf.feedbackResultName == '不需要反馈') {
       return Colours.text_text_6;
-    }else if(_wordGlwjxf.feedbackResultName=='已反馈'){
+    } else if (_wordGlwjxf.feedbackResultName == '已反馈') {
       return Colours.text_green;
     }
   }
-
 }

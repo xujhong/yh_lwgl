@@ -26,5 +26,8 @@ class Colours {
   static const Color text_green=Color.fromARGB(255, 60, 189, 76);
   static const Color text_text_6=Color.fromARGB(255, 102, 102, 102);
 
+  ///界面背景色
+  static const Color view_back=Color.fromARGB(255, 242, 242, 242);
+
 }
 

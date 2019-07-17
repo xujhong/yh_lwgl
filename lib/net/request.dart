@@ -1,3 +1,4 @@
+import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
@@ -23,6 +24,8 @@ abstract class Request {
   //获取管理文件列表数据
   Future<List<WordGlwjxfData>> getAjax_query_glwjxf_list(String currentUserId,int pageNum);
 
+  //管理文件详情
+  Future<GlwjxfdatailData> getAjax_query_glwjxf_datail(String wjId);
 
   //登录
   Future<UserData> login(String username, String password);

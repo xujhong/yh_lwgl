@@ -12,4 +12,7 @@ class Api {
 
   //登录
   static String login = 'login';//http://47.106.183.18:8080/mrxmgl/
+
+  ///管理文件详情
+  static String ajax_query_glwjxf_datail='app/wdgl/ajax_query_glwjxf_datail';
 }

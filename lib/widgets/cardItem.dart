@@ -24,7 +24,7 @@ class CardItem extends StatelessWidget {
     RoundedRectangleBorder shape = this.shape;
     Color color = this.color;
     margin ??=
-        EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0);
+        EdgeInsets.only(left: 5.0, top: 5.0, right: 5.0, bottom: 5.0);
     shape ??= new RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(4.0)));
     color ??= Colours.color_0xFFFFFFFF;
