@@ -16,7 +16,7 @@ import 'package:yh_lwgl/net/request.dart';
 
 ///请求
 class RequestImpl extends Request {
-  Dio _dio;
+  static Dio _dio;
 
   RequestImpl() : super.internal() {
     Options options = Options(baseUrl: Api.baseUrl, connectTimeout: 10000);
@@ -44,7 +44,7 @@ class RequestImpl extends Request {
     _dio.cookieJar = new PersistCookieJar(dir: path);
   }
 
-  _handleRes(Response response) {
+  static _handleRes(Response response) {
     Map<String, dynamic> resJson;
     if (response.data is String) {
       resJson = json.decode(response.data);
@@ -101,6 +101,13 @@ class RequestImpl extends Request {
   Future<GlwjxfdatailData> getAjax_query_glwjxf_datail(String wjId) async{
     // TODO: implement getAjax_query_glwjxf_datail
     
+    Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
+    return GlwjxfdatailData.fromJson(_handleRes(response));
+  }
+
+  static Future<GlwjxfdatailData> getquery_glwjxf_datail(int wjId) async{
+    // TODO: implement getAjax_query_glwjxf_datail
+
     Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
     return GlwjxfdatailData.fromJson(_handleRes(response));
   }

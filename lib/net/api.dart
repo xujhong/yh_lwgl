@@ -2,7 +2,7 @@
 class Api {
 
   //Base
-  static String baseUrl = 'http://47.106.183.18:8080/mrxmgl/';
+  static String baseUrl = 'http://101.200.174.203:8081/mrxmgl/';
 
   //制度汇编
   static String ajax_query_wdxx_list='app/wdgl/ajax_query_wdxx_list';
