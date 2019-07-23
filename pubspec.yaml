@@ -100,6 +100,9 @@ flutter:
      - assets/images/ic_save_file.png
      - assets/images/ic_error.png
      - assets/images/ic_arrow_right.png
+     - assets/images/img_icon_publish.png
+     - assets/images/img_icon_over.png
+     - assets/images/img_icon_outed.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

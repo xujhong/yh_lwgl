@@ -7,6 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/base_dto.dart';
 import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
+import 'package:yh_lwgl/model/slry_entity.dart';
+import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
@@ -105,11 +107,35 @@ class RequestImpl extends Request {
     return GlwjxfdatailData.fromJson(_handleRes(response));
   }
 
+  ///文件列表
   static Future<GlwjxfdatailData> getquery_glwjxf_datail(int wjId) async{
     // TODO: implement getAjax_query_glwjxf_datail
 
     Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
     return GlwjxfdatailData.fromJson(_handleRes(response));
   }
+  ///人员管理列表
+  Future<List<SlryData>> getAjax_slry_list(String organId,String currentUserId) async{
+
+    Response response =await _dio.post(Api.ajax_slry_list,data: FormData.from({'organId':organId,'currentUserId':currentUserId}));
+    List<SlryData> data=new List<SlryData>();
+
+    _handleRes(response).forEach((v) {
+      data.add(new SlryData.fromJson(v));
+    });
+    return data;
+  }
+
+  @override
+  Future<List<TzzyryData>> getAjax_tzzyry_list(String organId, String currentUserId) async {
+    // TODO: implement getAjax_tzzyry_list
+    Response response =await _dio.post(Api.ajax_tzzyry_list,data: FormData.from({'organId':organId,'currentUserId':currentUserId}));
+    List<TzzyryData> data=new List<TzzyryData>();
+    _handleRes(response).forEach((v) {
+      data.add(new TzzyryData.fromJson(v));
+    });
+    return data;
+  }
+
 
 }

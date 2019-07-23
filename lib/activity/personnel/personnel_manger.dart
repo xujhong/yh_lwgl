@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yh_lwgl/activity/personnel/personnel_manger_list.dart';
+import 'package:yh_lwgl/activity/personnel/personnel_manger_tzzylist.dart';
 import 'package:yh_lwgl/res/colors.dart';
 import 'package:yh_lwgl/res/dimens.dart';
 import 'package:yh_lwgl/res/styles.dart';
@@ -135,6 +136,7 @@ class _personnelMaingerState extends State<PersonnelManger>
             Gaps.line,
             Expanded(
                 child: PageView.builder(
+                  physics: NeverScrollableScrollPhysics(),
                     itemCount: 2,
                     onPageChanged: (index) {
                       if (_isPageCanChanged) {
@@ -143,7 +145,11 @@ class _personnelMaingerState extends State<PersonnelManger>
                     },
                     controller: _pageController,
                     itemBuilder: (BuildContext context, int index) {
-                      return PersonnelMangerList(index: index);
+                      if(index==0){
+                        return PersonnelMangerList(index: index);
+                      }else{
+                        return PersonnelMangerTzzyList(index: index);
+                      }
                     }))
           ],
         ));

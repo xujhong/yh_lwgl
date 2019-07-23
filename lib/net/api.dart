@@ -15,4 +15,10 @@ class Api {
 
   ///管理文件详情
   static String ajax_query_glwjxf_datail='app/wdgl/ajax_query_glwjxf_datail';
+
+  ///三类人员列表
+  static String ajax_slry_list='app/slry/ajax_slry_list';
+
+  ///特种作业人员
+  static String ajax_tzzyry_list='app/slry/ajax_tzzyry_list';
 }
