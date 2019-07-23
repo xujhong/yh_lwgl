@@ -1,4 +1,5 @@
 import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
+import 'package:yh_lwgl/model/slry_detail_entity.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
 import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
@@ -37,4 +38,5 @@ abstract class Request {
 
   //特种作业人员
   Future<List<TzzyryData>> getAjax_tzzyry_list(String organId,String currentUserId);
+
 }

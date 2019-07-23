@@ -49,12 +49,12 @@ class _personnelMaingerState extends State<PersonnelManger>
                   color: Colors.white,
                 ),
                 onPressed: () {}),
-            IconButton(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                onPressed: () {}),
+//            IconButton(
+//                icon: Icon(
+//                  Icons.add,
+//                  color: Colors.white,
+//                ),
+//                onPressed: () {}),
           ],
           title: Text("人员管理"),
         ),

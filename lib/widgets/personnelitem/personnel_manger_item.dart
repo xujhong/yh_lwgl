@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/activity/personnel/personnel_manger_details.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
 import 'package:yh_lwgl/res/colors.dart';
 import 'package:yh_lwgl/res/styles.dart';
@@ -12,62 +13,72 @@ class PersonnelMangerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Stack(
-      children: <Widget>[
-        Container(padding: const EdgeInsets.only(left: 10.0,top: 5.0),
-        child:  loadAssetImage(_imageState(), width: 50.0, height: 40.0),
+    return InkWell(
+        onTap: () {
+
+          Navigator.of(context).push(MaterialPageRoute<Null>(builder: (context){
+            return new PersonnelMangerDetails(slryData);
+          }));
+          
+        },
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(left: 10.0),
+              child: loadAssetImage(_imageState(), width: 50.0, height: 40.0),
             ),
-        Container(
-          padding: const EdgeInsets.only(left: 15.0, top: 40.0),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: Divider.createBorderSide(context,
-                        color: Colours.line, width: 0.8))),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                      child: Column(
+            Container(
+              padding: const EdgeInsets.only(left: 15.0, top: 35.0),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: Divider.createBorderSide(context,
+                            color: Colours.line, width: 0.8))),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      loadNetworkImage(slryData.fjwjFwdzss,
-                          width: 72.0, height: 72.0),
-                      Gaps.vGap5,
-                      Text(
-                        slryData.zwName ?? '-',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: _colorWidget()),
-                      ),
-                    ],
-                  )),
-                  Gaps.hGap8,
-                  Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Expanded(
+                          child: Column(
                         children: <Widget>[
-                          Text('姓 名:${slryData.tzzyXm ?? '-'}',
-                              style: TextStyles.textNormal14),
+                          loadNetworkImage(slryData.fjwjFwdzss,
+                              width: 72.0, height: 72.0),
                           Gaps.vGap5,
-                          Text('身份证号:${slryData.slrySfzh ?? '-'}',
-                              style: TextStyles.textNormal14),
-                          Gaps.vGap5,
-                          Text('进场日期:${slryData.slryJcrq ?? '-'}',
-                              style: TextStyles.textNormal14),
-                          Gaps.vGap5,
-                          Text('人员类型:${slryData.slryJszc ?? '-'}',
-                              style: TextStyles.textNormal14),
+                          Text(
+                            slryData.zwName ?? '-',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: _colorWidget()),
+                          ),
                         ],
-                      ))
-                ],
+                      )),
+                      Gaps.hGap8,
+                      Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('姓 名:${slryData.tzzyXm ?? '-'}',
+                                  style: TextStyles.textNormal14),
+                              Gaps.vGap5,
+                              Text('身份证号:${slryData.slrySfzh ?? '-'}',
+                                  style: TextStyles.textNormal14),
+                              Gaps.vGap5,
+                              Text('进场日期:${slryData.slryJcrq ?? '-'}',
+                                  style: TextStyles.textNormal14),
+                              Gaps.vGap5,
+                              Text('人员类型:${slryData.slryJszc ?? '-'}',
+                                  style: TextStyles.textNormal14),
+                            ],
+                          ))
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ],
-    );
+          ],
+        ));
   }
 
   Color _colorWidget() {
