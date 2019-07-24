@@ -9,6 +9,7 @@ import 'package:yh_lwgl/model/base_dto.dart';
 import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
 import 'package:yh_lwgl/model/slry_detail_entity.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
+import 'package:yh_lwgl/model/tzzyry_details_entity.dart';
 import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
@@ -140,11 +141,17 @@ class RequestImpl extends Request {
   }
 
   //三类人员详情信息
-
   static Future<SlryDetailData> getAjax_slry_detail(int slryId) async {
     // TODO: implement getAjax_slry_detail
     Response response= await _dio.post(Api.ajax_slry_detail,data: FormData.from({'slryId':slryId}));
     return SlryDetailData.fromJson(_handleRes(response));
+  }
+
+  //特种作业人员详情
+  static Future<TzzyryDetailsData> getAjax_tzzyry_detail(int tzzyId) async {
+    // TODO: implement getAjax_tzzyry_detail
+    Response response= await _dio.post(Api.ajax_tzzyry_detail,data: FormData.from({'tzzyId':tzzyId}));
+    return TzzyryDetailsData.fromJson(_handleRes(response));
   }
 
 

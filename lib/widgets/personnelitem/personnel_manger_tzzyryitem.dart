@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/activity/personnel/personnel_manger_tzzydetails.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
 import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/res/colors.dart';
@@ -15,7 +16,9 @@ class PersonnelMangerTzzyryItem extends StatelessWidget {
     // TODO: implement build
     return InkWell(
       onTap: () {
-
+        Navigator.of(context).push(MaterialPageRoute<Null>(builder: (context){
+          return new PersonnelMangerTzzyDetails(tzzyryData);
+        }));
       },
       child: Stack(
         children: <Widget>[

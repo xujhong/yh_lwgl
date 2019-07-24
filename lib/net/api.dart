@@ -24,4 +24,7 @@ class Api {
 
   ///三类人员详情信息
   static String ajax_slry_detail='app/slry/ajax_slry_detail';
+
+  //特种作业人员详情
+  static String ajax_tzzyry_detail='app/slry/ajax_tzzyry_detail';
 }
