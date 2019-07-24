@@ -39,6 +39,7 @@ class _personnelMaingerState extends State<PersonnelManger>
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    super.build(context);
     return Scaffold(
         appBar: AppBar(
           brightness: Brightness.light,

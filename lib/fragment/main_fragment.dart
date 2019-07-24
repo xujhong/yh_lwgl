@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/activity/Inspection/Inspection_manger.dart';
 import 'package:yh_lwgl/activity/personnel/personnel_manger.dart';
 import 'package:yh_lwgl/activity/wordmanger/textManageDetailActivity.dart';
 import 'package:yh_lwgl/common/common.dart';
@@ -61,6 +62,9 @@ class _main_fragment extends State<MainFragment> {
                 } else if (menu.channel == Constant.SECURITY_TWO) {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PersonnelManger()));
+                }else if(menu.channel==Constant.SECURITY_THREE){
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => InspectionManger()));
                 }
               },
             )
