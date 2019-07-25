@@ -42,11 +42,11 @@ abstract class Request {
   //特种作业人员
   Future<List<TzzyryData>> getAjax_tzzyry_list(String organId,String currentUserId);
 
-  //特种作业人员
+  //巡检任务分类
   Future<List<XjrwCountData>> getAjax_zrw_count(int staffId, int organId);
 
   //巡检任务列表
-  Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum,int staffId);
+  Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum,int staffId,int organId);
 
 
 }

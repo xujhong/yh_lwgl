@@ -189,9 +189,9 @@ class RequestImpl extends Request {
 
   //巡检任务列表
   @override
-  Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum, int staffId) async {
+  Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum, int staffId,int organId) async {
     Response response = await _dio.post(Api.ajax_xjrw_zrw_list,
-        data: FormData.from({'operFlag': operFlag, 'pageNum': pageNum,'pageSize':Constant.PAGE_SIZE,'staffId':staffId}));
+        data: FormData.from({'operFlag': operFlag, 'pageNum': pageNum,'pageSize':Constant.PAGE_SIZE,'staffId':staffId,'organId':organId}));
     List<XjrwListData> data = new List<XjrwListData>();
     _handleRes(response).forEach((v) {
       data.add(new XjrwListData.fromJson(v));

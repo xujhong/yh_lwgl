@@ -18,6 +18,11 @@ import 'package:yh_lwgl/widgets/xjru/xjru_list_item.dart';
 
 ///巡检任务列表
 class InspectionTaskList extends StatefulWidget {
+
+  int index;
+
+  InspectionTaskList({Key key, this.index}) : super(key: key);
+
   @override
   InspectionTaskListState createState() => InspectionTaskListState();
 }
@@ -79,7 +84,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
             },
           ),
         ),
-        Gaps.vGap16,
+        Gaps.vGap4,
         Expanded(
           child: _listBuild(),
         )
@@ -133,7 +138,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
       case PageStatus.DATA:
         return PullRefresh(
           onRefresh: _refresh,
-          onLoadmore: _refresh,
+          onLoadmore: _loadMore,
           scrollView: ListView.builder(
             itemBuilder: (context, index) {
               return XjruListItem(xjrwListData: _xjrwListDataList[index]);
@@ -155,7 +160,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
   //下拉刷新数据
   _refresh() async {
     intPage = 1;
-    Request().getAjax_xjrw_zrw_list(1, intPage, 2145).then((data) {
+    Request().getAjax_xjrw_zrw_list(widget.index, intPage, 2145,1244).then((data) {
       setState(() {
         //如果不足一页则下页没有数据
         _xjrwListDataList = data;
@@ -166,6 +171,23 @@ class InspectionTaskListState extends State<InspectionTaskList>
     }).catchError((e) {
       print('错误');
       print(e.toString());
+      Toast.show(e.message);
+    });
+  }
+
+  //上拉加载更多数据
+  _loadMore() async {
+    Request().getAjax_xjrw_zrw_list(widget.index, intPage, 2145,1244).then((data) {
+      setState(() {
+        //判断如果返回的数据长度没有达到达到一页则下一页没有数据
+        if(isDataEmpty){
+          _xjrwListDataList.addAll(data);
+          intPage++;
+        }
+        isData(data);
+
+      });
+    }).catchError((e) {
       Toast.show(e.message);
     });
   }

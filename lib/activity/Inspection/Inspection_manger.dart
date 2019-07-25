@@ -129,9 +129,9 @@ class _inspectionMangerState extends State<InspectionManger>
                 controller: _pageController,
                 itemBuilder: (BuildContext context, int index) {
                   if(index==0){
-                    return InspectionTaskList();
+                    return InspectionTaskList(index: index+1,);
                   }else{
-                    return InspectionRecordList();
+                    return InspectionRecordList(index: index+1);
                   }
                 }))
       ],
