@@ -6,6 +6,7 @@ import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
+import 'package:yh_lwgl/model/xjrw_count_entity.dart';
 import 'package:yh_lwgl/net/requestimpl.dart';
 
 
@@ -39,6 +40,9 @@ abstract class Request {
 
   //特种作业人员
   Future<List<TzzyryData>> getAjax_tzzyry_list(String organId,String currentUserId);
+
+  //特种作业人员
+  Future<List<XjrwCountData>> getAjax_zrw_count(int staffId, int organId);
 
 
 }

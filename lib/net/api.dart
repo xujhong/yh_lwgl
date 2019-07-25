@@ -27,4 +27,7 @@ class Api {
 
   //特种作业人员详情
   static String ajax_tzzyry_detail='app/slry/ajax_tzzyry_detail';
+
+  //巡检任务分类
+  static String ajax_zrw_count='app/rcxj/ajax_zrw_count';
 }

@@ -14,6 +14,7 @@ import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
+import 'package:yh_lwgl/model/xjrw_count_entity.dart';
 import 'package:yh_lwgl/net/api.dart';
 import 'package:yh_lwgl/net/interceptor.dart';
 import 'package:yh_lwgl/net/request.dart';
@@ -29,7 +30,6 @@ class RequestImpl extends Request {
     _dio.interceptor.request.onSend = interceptor.onSend;
     _dio.interceptor.response.onSuccess = interceptor.onSuccess;
     _dio.interceptor.response.onError = interceptor.onError;
-
 
 //    _dio.onHttpClientCreate = (HttpClient client) {
 //      client.findProxy = (uri) {
@@ -67,16 +67,21 @@ class RequestImpl extends Request {
 
   //获取文档列表
   @override
-  Future<List<WordData>> getSubscriptions(String zdhbType, int pageNum,String currentUserId) async {
+  Future<List<WordData>> getSubscriptions(
+      String zdhbType, int pageNum, String currentUserId) async {
     Response response = await _dio.post(Api.ajax_query_wdxx_list,
-        data: FormData.from({'zdhbType': zdhbType, 'pageSize':Constant.PAGE_SIZE,'pageNum':pageNum,'currentUserId':currentUserId}));
+        data: FormData.from({
+          'zdhbType': zdhbType,
+          'pageSize': Constant.PAGE_SIZE,
+          'pageNum': pageNum,
+          'currentUserId': currentUserId
+        }));
     List<WordData> data = new List<WordData>();
     _handleRes(response).forEach((v) {
       data.add(new WordData.fromJson(v));
     });
     return data;
   }
-
 
   //登录
   @override
@@ -86,13 +91,17 @@ class RequestImpl extends Request {
     return UserData.fromJson(_handleRes(response));
   }
 
-
   ///获取管理文件列表
   @override
-  Future<List<WordGlwjxfData>> getAjax_query_glwjxf_list(String currentUserId, int pageNum)async {
-
-    Response response =await _dio.post(Api.ajax_query_glwjxf_list,data: FormData.from({'currentUserId':currentUserId,'pageNum':pageNum,'pageSize':Constant.PAGE_SIZE}));
-    List<WordGlwjxfData> data=new List<WordGlwjxfData>();
+  Future<List<WordGlwjxfData>> getAjax_query_glwjxf_list(
+      String currentUserId, int pageNum) async {
+    Response response = await _dio.post(Api.ajax_query_glwjxf_list,
+        data: FormData.from({
+          'currentUserId': currentUserId,
+          'pageNum': pageNum,
+          'pageSize': Constant.PAGE_SIZE
+        }));
+    List<WordGlwjxfData> data = new List<WordGlwjxfData>();
 
     _handleRes(response).forEach((v) {
       data.add(new WordGlwjxfData.fromJson(v));
@@ -102,25 +111,30 @@ class RequestImpl extends Request {
 
   ///管理文件详情
   @override
-  Future<GlwjxfdatailData> getAjax_query_glwjxf_datail(String wjId) async{
+  Future<GlwjxfdatailData> getAjax_query_glwjxf_datail(String wjId) async {
     // TODO: implement getAjax_query_glwjxf_datail
-    
-    Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
+
+    Response response = await _dio.post(Api.ajax_query_glwjxf_datail,
+        data: FormData.from({'wjId': wjId}));
     return GlwjxfdatailData.fromJson(_handleRes(response));
   }
 
   ///文件列表
-  static Future<GlwjxfdatailData> getquery_glwjxf_datail(int wjId) async{
+  static Future<GlwjxfdatailData> getquery_glwjxf_datail(int wjId) async {
     // TODO: implement getAjax_query_glwjxf_datail
 
-    Response response= await _dio.post(Api.ajax_query_glwjxf_datail,data: FormData.from({'wjId':wjId}));
+    Response response = await _dio.post(Api.ajax_query_glwjxf_datail,
+        data: FormData.from({'wjId': wjId}));
     return GlwjxfdatailData.fromJson(_handleRes(response));
   }
-  ///人员管理列表
-  Future<List<SlryData>> getAjax_slry_list(String organId,String currentUserId) async{
 
-    Response response =await _dio.post(Api.ajax_slry_list,data: FormData.from({'organId':organId,'currentUserId':currentUserId}));
-    List<SlryData> data=new List<SlryData>();
+  ///人员管理列表
+  Future<List<SlryData>> getAjax_slry_list(
+      String organId, String currentUserId) async {
+    Response response = await _dio.post(Api.ajax_slry_list,
+        data: FormData.from(
+            {'organId': organId, 'currentUserId': currentUserId}));
+    List<SlryData> data = new List<SlryData>();
 
     _handleRes(response).forEach((v) {
       data.add(new SlryData.fromJson(v));
@@ -130,10 +144,13 @@ class RequestImpl extends Request {
 
   //特种作业人员列表
   @override
-  Future<List<TzzyryData>> getAjax_tzzyry_list(String organId, String currentUserId) async {
+  Future<List<TzzyryData>> getAjax_tzzyry_list(
+      String organId, String currentUserId) async {
     // TODO: implement getAjax_tzzyry_list
-    Response response =await _dio.post(Api.ajax_tzzyry_list,data: FormData.from({'organId':organId,'currentUserId':currentUserId}));
-    List<TzzyryData> data=new List<TzzyryData>();
+    Response response = await _dio.post(Api.ajax_tzzyry_list,
+        data: FormData.from(
+            {'organId': organId, 'currentUserId': currentUserId}));
+    List<TzzyryData> data = new List<TzzyryData>();
     _handleRes(response).forEach((v) {
       data.add(new TzzyryData.fromJson(v));
     });
@@ -143,16 +160,29 @@ class RequestImpl extends Request {
   //三类人员详情信息
   static Future<SlryDetailData> getAjax_slry_detail(int slryId) async {
     // TODO: implement getAjax_slry_detail
-    Response response= await _dio.post(Api.ajax_slry_detail,data: FormData.from({'slryId':slryId}));
+    Response response = await _dio.post(Api.ajax_slry_detail,
+        data: FormData.from({'slryId': slryId}));
     return SlryDetailData.fromJson(_handleRes(response));
   }
 
   //特种作业人员详情
   static Future<TzzyryDetailsData> getAjax_tzzyry_detail(int tzzyId) async {
     // TODO: implement getAjax_tzzyry_detail
-    Response response= await _dio.post(Api.ajax_tzzyry_detail,data: FormData.from({'tzzyId':tzzyId}));
+    Response response = await _dio.post(Api.ajax_tzzyry_detail,
+        data: FormData.from({'tzzyId': tzzyId}));
     return TzzyryDetailsData.fromJson(_handleRes(response));
   }
 
-
+  //巡检任务分类
+  @override
+  Future<List<XjrwCountData>> getAjax_zrw_count(int staffId, int organId) async {
+// TODO: implement getAjax_tzzyry_list
+    Response response = await _dio.post(Api.ajax_zrw_count,
+        data: FormData.from({'staffId': staffId, 'organId': organId}));
+    List<XjrwCountData> data = new List<XjrwCountData>();
+    _handleRes(response).forEach((v) {
+      data.add(new XjrwCountData.fromJson(v));
+    });
+    return data;
+  }
 }
