@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yh_lwgl/common/common.dart';
+import 'package:yh_lwgl/common/pagestatus.dart';
 import 'package:yh_lwgl/model/tzzyry_details_entity.dart';
-import 'package:yh_lwgl/model/xjrw_count_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_count_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_list_entity.dart';
 import 'package:yh_lwgl/net/request.dart';
 import 'package:yh_lwgl/net/requestimpl.dart';
 import 'package:yh_lwgl/res/colors.dart';
@@ -9,6 +12,9 @@ import 'package:yh_lwgl/widgets/error_view.dart';
 import 'package:yh_lwgl/widgets/image_utils.dart';
 import 'package:yh_lwgl/widgets/loading.dart';
 import 'package:yh_lwgl/widgets/popup_window.dart';
+import 'package:yh_lwgl/widgets/pullrefresh/pullrefresh.dart';
+import 'package:yh_lwgl/widgets/toast.dart';
+import 'package:yh_lwgl/widgets/xjru/xjru_list_item.dart';
 
 ///巡检任务列表
 class InspectionTaskList extends StatefulWidget {
@@ -16,89 +22,159 @@ class InspectionTaskList extends StatefulWidget {
   InspectionTaskListState createState() => InspectionTaskListState();
 }
 
-class InspectionTaskListState extends State<InspectionTaskList> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin{
+class InspectionTaskListState extends State<InspectionTaskList>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   GlobalKey _buttonKey = GlobalKey();
   GlobalKey _bodyKey = GlobalKey();
 
   var _sortIndex = 0;
 
-//  List<String> _sortList = ["全部商品", "个人护理", "饮料", "沐浴洗护", "厨房用具", "休闲食品", "生鲜水果", "酒水", "家庭清洁"];
+  int intPage = 1;
+  final ScrollController scrollController = new ScrollController();
+  PageStatus status = PageStatus.LOADING;
+
   //请求返回的对象
   AsyncSnapshot<List<XjrwCountData>> _slryDetailData;
+  List<XjrwListData> _xjrwListDataList = new List();
+
+  //判断数据是否已经加载完成
+  bool isDataEmpty = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     // TODO: implement build
     return Scaffold(
-      body: Container(
-        child: FutureBuilder<List<XjrwCountData>>(
-          future:  Request().getAjax_zrw_count(2148, 1244),
-          builder: (context, AsyncSnapshot<List<XjrwCountData>> snap) {
-            if (snap.connectionState == ConnectionState.done) {
-              if (snap.hasError) {
-                return ErrorView(
-                  onClick: () {
-                    Request().getAjax_zrw_count(2148, 1244);
-                  },
-                );
-              }
-              //加载完成
-              _slryDetailData = snap;
-              return _buildBody();
-            } else if (snap.connectionState == ConnectionState.waiting) {
-              //加载中
-              print('waiting');
-              return Loading();
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBody() {
-    return Column(
+        body: Column(
       key: _bodyKey,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          key: _buttonKey,
-          child: Container(
-            margin: const EdgeInsets.only(left: 15.0),
-            padding: const EdgeInsets.fromLTRB(0, 15.0, 15.0, 15.0),
-            constraints: BoxConstraints(
-              maxHeight: double.infinity,
-              minHeight: 50.0,
-            ),
-            width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border(
-                    bottom: Divider.createBorderSide(context,
-                        color: Colours.line, width: 0.6))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 10.0),
-                  child: Text(
-                    _slryDetailData.data[_sortIndex].zybwMc??'',
-                    style: TextStyles.textNormal14,
-                  ),
-                ),
-                loadAssetImage("expand", width: 16.0, height: 16.0)
-              ],
-            ),
+        Container(
+          child: FutureBuilder<List<XjrwCountData>>(
+            future: Request().getAjax_zrw_count(2148, 1244),
+            builder: (context, AsyncSnapshot<List<XjrwCountData>> snap) {
+              if (snap.connectionState == ConnectionState.done) {
+                if (snap.hasError) {
+                  return ErrorView(
+                    onClick: () {
+                      Request().getAjax_zrw_count(2148, 1244);
+                    },
+                  );
+                }
+                //加载完成
+                _slryDetailData = snap;
+                return _buildBody();
+              } else if (snap.connectionState == ConnectionState.waiting) {
+                //加载中
+                print('waiting');
+                return Loading();
+              }
+            },
           ),
-          onTap: () {
-            _showSortMenu();
-          },
         ),
+        Gaps.vGap16,
+        Expanded(
+          child: _listBuild(),
+        )
       ],
+    ));
+  }
+
+  Widget _buildBody() {
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      key: _buttonKey,
+      child: Container(
+        margin: const EdgeInsets.only(left: 15.0),
+        padding: const EdgeInsets.fromLTRB(0, 15.0, 15.0, 15.0),
+        constraints: BoxConstraints(
+          maxHeight: double.infinity,
+          minHeight: 50.0,
+        ),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: Divider.createBorderSide(context,
+                    color: Colours.line, width: 0.6))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 10.0),
+              child: Text(
+                _slryDetailData.data[_sortIndex].zybwMc ?? '',
+                style: TextStyles.textNormal14,
+              ),
+            ),
+            loadAssetImage("expand", width: 16.0, height: 16.0)
+          ],
+        ),
+      ),
+      onTap: () {
+        _showSortMenu();
+      },
     );
+  }
+
+  _listBuild() {
+    switch (status) {
+      case PageStatus.LOADING:
+        return Loading();
+        break;
+      case PageStatus.DATA:
+        return PullRefresh(
+          onRefresh: _refresh,
+          onLoadmore: _refresh,
+          scrollView: ListView.builder(
+            itemBuilder: (context, index) {
+              return XjruListItem(xjrwListData: _xjrwListDataList[index]);
+            },
+            itemCount: _xjrwListDataList.length,
+          ),
+        );
+        break;
+      case PageStatus.ERROR:
+      default:
+        return ErrorView(
+          onClick: () {
+            _refresh();
+          },
+        );
+    }
+  }
+
+  //下拉刷新数据
+  _refresh() async {
+    intPage = 1;
+    Request().getAjax_xjrw_zrw_list(1, intPage, 2145).then((data) {
+      setState(() {
+        //如果不足一页则下页没有数据
+        _xjrwListDataList = data;
+        intPage++;
+        status = PageStatus.DATA;
+        isData(data);
+      });
+    }).catchError((e) {
+      print('错误');
+      print(e.toString());
+      Toast.show(e.message);
+    });
+  }
+
+  bool isData(data) {
+    if (data.length < Constant.PAGE_SIZE) {
+      isDataEmpty = false;
+    }
+    return isDataEmpty;
   }
 
   _showSortMenu() {

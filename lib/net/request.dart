@@ -6,7 +6,8 @@ import 'package:yh_lwgl/model/tzzyry_entity.dart';
 import 'package:yh_lwgl/model/user_entity.dart';
 import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
-import 'package:yh_lwgl/model/xjrw_count_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_count_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_list_entity.dart';
 import 'package:yh_lwgl/net/requestimpl.dart';
 
 
@@ -43,6 +44,9 @@ abstract class Request {
 
   //特种作业人员
   Future<List<XjrwCountData>> getAjax_zrw_count(int staffId, int organId);
+
+  //巡检任务列表
+  Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum,int staffId);
 
 
 }

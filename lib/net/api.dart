@@ -30,4 +30,7 @@ class Api {
 
   //巡检任务分类
   static String ajax_zrw_count='app/rcxj/ajax_zrw_count';
+
+  //巡检任务列表
+  static String ajax_xjrw_zrw_list='app/rcxj/ajax_xjrw_zrw_list';
 }

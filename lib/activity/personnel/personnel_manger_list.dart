@@ -62,7 +62,6 @@ class personnelMangerListState extends State<PersonnelMangerList>
   }
 
   //列表数据
-  //列表数据
   Widget _buildBody() {
     switch (status) {
       case PageStatus.LOADING:
