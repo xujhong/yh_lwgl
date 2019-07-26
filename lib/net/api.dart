@@ -34,4 +34,7 @@ class Api {
   //巡检任务列表
   static String ajax_xjrw_zrw_list='app/rcxj/ajax_xjrw_zrw_list';
 
+  //巡检任务详情
+  static String ajax_xjrw_yjczrw_detail='app/rcxj/ajax_xjrw_yjczrw_detail';
+
 }

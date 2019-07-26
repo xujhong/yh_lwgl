@@ -8,6 +8,7 @@ import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_count_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_list_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_yjczrw_detail_entity.dart';
 import 'package:yh_lwgl/net/requestimpl.dart';
 
 
@@ -48,5 +49,7 @@ abstract class Request {
   //巡检任务列表
   Future<List<XjrwListData>> getAjax_xjrw_zrw_list(int operFlag, int pageNum,int staffId,int organId);
 
+  //巡检记录list
+  Future<List<XjrwYjczrwDetailData>> getAjax_xjrw_yjczrw_detail(int zrwId,int pageNum);
 
 }

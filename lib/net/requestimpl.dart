@@ -16,6 +16,7 @@ import 'package:yh_lwgl/model/word_entity.dart';
 import 'package:yh_lwgl/model/word_glwjxf_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_count_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_list_entity.dart';
+import 'package:yh_lwgl/model/xjru/xjrw_yjczrw_detail_entity.dart';
 import 'package:yh_lwgl/net/api.dart';
 import 'package:yh_lwgl/net/interceptor.dart';
 import 'package:yh_lwgl/net/request.dart';
@@ -198,6 +199,22 @@ class RequestImpl extends Request {
     });
     return data;
   }
+
+  //巡检任务列表item
+  @override
+  Future<List<XjrwYjczrwDetailData>> getAjax_xjrw_yjczrw_detail(int zrwId, int pageNum) async{
+    // TODO: implement getAjax_xjrw_yjczrw_detail
+    Response response = await _dio.post(Api.ajax_xjrw_yjczrw_detail,
+        data: FormData.from({'zrwId': zrwId, 'pageNum': pageNum,'pageSize':Constant.PAGE_SIZE}));
+    List<XjrwYjczrwDetailData> data = new List<XjrwYjczrwDetailData>();
+    _handleRes(response).forEach((v) {
+      data.add(new XjrwYjczrwDetailData.fromJson(v));
+    });
+    return data;
+  }
+
+
+
 
 
 }
