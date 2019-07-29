@@ -8,8 +8,9 @@ import 'package:yh_lwgl/widgets/error_view.dart';
 import 'package:yh_lwgl/widgets/loading.dart';
 import 'package:yh_lwgl/widgets/pullrefresh/pullrefresh.dart';
 import 'package:yh_lwgl/widgets/toast.dart';
-import 'package:yh_lwgl/widgets/xjru/xjru_record_detail.dart';
+import 'package:yh_lwgl/widgets/xjru/xjru_record_detail_item.dart';
 
+//日常巡检列表详情
 class InspectionRecordDetail extends StatefulWidget{
 
   XjrwListData xjrwListData;
@@ -28,6 +29,13 @@ class _inspectionRecordDetail extends State<InspectionRecordDetail>{
   //判断数据是否已经加载完成
   bool isDataEmpty = true;
   List<XjrwYjczrwDetailData> _xjrwListDataList = new List();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _refresh();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,7 @@ class _inspectionRecordDetail extends State<InspectionRecordDetail>{
           onLoadmore: _loadMore,
           scrollView: ListView.builder(
             itemBuilder: (context, index) {
-              return XjruRecordDetail(xjrwYjczrwDetailData: _xjrwListDataList[index],);
+              return XjruRecordDetailItem(xjrwYjczrwDetailData: _xjrwListDataList[index],);
             },
             itemCount: _xjrwListDataList.length,
           ),

@@ -15,7 +15,7 @@ class XjruRecordItem extends StatelessWidget {
     return Card(
       child: InkWell(
         onTap: (){
-          if(xjrwListData.)
+          if(xjrwListData.zrwYjcs>0)
           //法律法规
             Navigator.of(context)
               .push(new MaterialPageRoute<Null>(builder: (context) {

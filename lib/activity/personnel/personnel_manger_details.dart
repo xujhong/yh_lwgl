@@ -75,7 +75,7 @@ class _personnelMangerDetailsState extends State<PersonnelMangerDetails>
               height: 8.0,
               color: Colours.line,
             ),
-            PhotoGrivedShow(_photoIcon(),'头像'),
+            PhotoGrivedShow(urlPhoto: _photoIcon(),title: '头像',),
             Container(
               width: double.infinity,
               height: 8.0,
@@ -123,7 +123,7 @@ class _personnelMangerDetailsState extends State<PersonnelMangerDetails>
               title: '复审日期',
               content: _slryDetailData.data.slryFsrq,
             ),
-            PhotoGrivedShow(_zsListIcon(_slryDetailData.data.zsList),'证书'),
+            PhotoGrivedShow(urlPhoto: _zsListIcon(_slryDetailData.data.zsList),title: '证书',),
             Container(
               width: double.infinity,
               height: 8.0,

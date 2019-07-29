@@ -9,14 +9,14 @@ class PhotoGrivedShow extends StatelessWidget {
   String title;
   List<String> urlPhoto;
 
-  PhotoGrivedShow(this.urlPhoto, this.title);
+  PhotoGrivedShow({Key key, @required this.urlPhoto, this.title}):super(key:key);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
       margin: EdgeInsets.only(left: 15.0),
-      padding: const EdgeInsets.fromLTRB(0, 15.0, 15.0, 15.0),
+      padding: const EdgeInsets.fromLTRB(0, 10.0, 15.0, 15.0),
       constraints: BoxConstraints(
         maxHeight: double.infinity,
         minHeight: 50.0,
@@ -31,11 +31,18 @@ class PhotoGrivedShow extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: TextStyles.textDark14,
+          Offstage(
+            offstage: title == null,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  title??'',
+                  style: TextStyles.textDark14,
+                ),
+                Gaps.vGap10,
+              ],
+            ),
           ),
-          Gaps.vGap10,
           GridView.builder(
             itemCount: urlPhoto.length,
             shrinkWrap: true,
