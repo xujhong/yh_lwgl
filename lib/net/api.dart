@@ -37,4 +37,7 @@ class Api {
   //巡检任务详情
   static String ajax_xjrw_yjczrw_detail='app/rcxj/ajax_xjrw_yjczrw_detail';
 
+  //隐患提交记录
+  static String ajax_query_fxyh_list='app/yhkb/ajax_query_fxyh_list';
+
 }

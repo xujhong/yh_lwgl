@@ -1,4 +1,5 @@
 import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
+import 'package:yh_lwgl/model/hidden/fxyh_list_entity.dart';
 import 'package:yh_lwgl/model/slry_detail_entity.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
 import 'package:yh_lwgl/model/tzzyry_details_entity.dart';
@@ -51,5 +52,8 @@ abstract class Request {
 
   //巡检记录list
   Future<List<XjrwYjczrwDetailData>> getAjax_xjrw_yjczrw_detail(int zrwId,int pageNum);
+
+  //发现隐患提交记录
+  Future<List<FxyhListData>> getAjax_query_fxyh_list(int currentUserId);
 
 }

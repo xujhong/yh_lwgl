@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/model/base_dto.dart';
 import 'package:yh_lwgl/model/glwjxfdatail_entity.dart';
+import 'package:yh_lwgl/model/hidden/fxyh_list_entity.dart';
 import 'package:yh_lwgl/model/slry_detail_entity.dart';
 import 'package:yh_lwgl/model/slry_entity.dart';
 import 'package:yh_lwgl/model/tzzyry_details_entity.dart';
@@ -214,7 +215,16 @@ class RequestImpl extends Request {
   }
 
 
-
-
-
+  //隐患提交记录列表
+  @override
+  Future<List<FxyhListData>> getAjax_query_fxyh_list(int currentUserId) async {
+    // TODO: implement getAjax_query_fxyh_list
+    Response response = await _dio.post(Api.ajax_query_fxyh_list,
+        data: FormData.from({'currentUserId': currentUserId}));
+    List<FxyhListData> data = new List<FxyhListData>();
+    _handleRes(response).forEach((v) {
+      data.add(new FxyhListData.fromJson(v));
+    });
+    return data;
+  }
 }

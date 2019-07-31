@@ -17,6 +17,17 @@ class Constant {
   static const int WORD_THREE = 01003;
   static const int WORD_FOUR = 01004;
 
+  //隐患快报
+  static const int HIDDEN_TIJIAO=02001;
+  //提交记录
+  static const int HIDDEN_JILU=02002;
+  //提报隐患
+  static const int HIDDEN_TIBAO=02003;
+  //提报处置
+  static const int HIDDEN_TIBAO_CHUZHI=02004;
+  //提报记录
+  static const int HIDDEN_TIBAO_JILU=02005;
+
   //管理文件
   static const int WORD_MANGER_ONE = 020;
 

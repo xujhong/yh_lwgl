@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yh_lwgl/activity/Inspection/Inspection_manger.dart';
+import 'package:yh_lwgl/activity/hiddendanger/hiddendanger_manger.dart';
+import 'package:yh_lwgl/activity/hiddengovernment/hiddengovernment_manger.dart';
 import 'package:yh_lwgl/activity/personnel/personnel_manger.dart';
 import 'package:yh_lwgl/activity/wordmanger/textManageDetailActivity.dart';
 import 'package:yh_lwgl/common/common.dart';
@@ -62,9 +64,15 @@ class _main_fragment extends State<MainFragment> {
                 } else if (menu.channel == Constant.SECURITY_TWO) {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => PersonnelManger()));
-                }else if(menu.channel==Constant.SECURITY_THREE){
+                } else if (menu.channel == Constant.SECURITY_THREE) {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => InspectionManger()));
+                } else if (menu.channel == Constant.SECURITY_FOUR) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HiddendangerManger()));
+                } else if (menu.channel == Constant.SECURITY_FIVE) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HiddengovernmentManger()));
                 }
               },
             )

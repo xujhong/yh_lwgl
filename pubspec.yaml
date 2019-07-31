@@ -106,6 +106,17 @@ flutter:
      - assets/images/img_icon_over.png
      - assets/images/img_icon_outed.png
      - assets/images/expand.png
+     - assets/images/img_fast_repost.png
+     - assets/images/img_find_danger.png
+     - assets/images/img_find_danger_list.png
+     - assets/images/img_repost_handle.png
+     - assets/images/img_repost_list.png
+     - assets/images/img_wait_update.png
+     - assets/images/img_wait_verify.png
+     - assets/images/img_pass_no_result.png
+     - assets/images/img_update_over.png
+     - assets/images/img_danger_level_com.png
+     - assets/images/img_danger_level_big.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
