@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:yh_lwgl/common/common.dart';
 import 'package:yh_lwgl/common/pagestatus.dart';
-import 'package:yh_lwgl/model/tzzyry_details_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_count_entity.dart';
 import 'package:yh_lwgl/model/xjru/xjrw_list_entity.dart';
 import 'package:yh_lwgl/net/request.dart';
-import 'package:yh_lwgl/net/requestimpl.dart';
 import 'package:yh_lwgl/res/colors.dart';
+import 'package:yh_lwgl/res/dimens.dart';
 import 'package:yh_lwgl/res/styles.dart';
 import 'package:yh_lwgl/widgets/error_view.dart';
 import 'package:yh_lwgl/widgets/image_utils.dart';
 import 'package:yh_lwgl/widgets/loading.dart';
+import 'package:yh_lwgl/widgets/menu_reveal.dart';
 import 'package:yh_lwgl/widgets/popup_window.dart';
 import 'package:yh_lwgl/widgets/pullrefresh/pullrefresh.dart';
 import 'package:yh_lwgl/widgets/toast.dart';
@@ -18,7 +18,6 @@ import 'package:yh_lwgl/widgets/xjru/xjru_list_item.dart';
 
 ///巡检任务列表
 class InspectionTaskList extends StatefulWidget {
-
   int index;
 
   InspectionTaskList({Key key, this.index}) : super(key: key);
@@ -31,9 +30,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   GlobalKey _buttonKey = GlobalKey();
   GlobalKey _bodyKey = GlobalKey();
-
   var _sortIndex = 0;
-
   int intPage = 1;
   final ScrollController scrollController = new ScrollController();
   PageStatus status = PageStatus.LOADING;
@@ -44,11 +41,23 @@ class InspectionTaskListState extends State<InspectionTaskList>
 
   //判断数据是否已经加载完成
   bool isDataEmpty = true;
+  int _selectIndex = -1;
+
+  Animation<double> _animation;
+  AnimationController _controller;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    //初始化动画控制器
+    _controller = new AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 450));
+    //动画曲线
+    CurvedAnimation _curvedAnimation =
+        CurvedAnimation(parent: _controller, curve: Curves.easeOutSine);
+    _animation = new Tween(begin: 0.0, end: 1.1).animate(_curvedAnimation);
+
     _refresh();
   }
 
@@ -141,7 +150,25 @@ class InspectionTaskListState extends State<InspectionTaskList>
           onLoadmore: _loadMore,
           scrollView: ListView.builder(
             itemBuilder: (context, index) {
-              return XjruListItem(xjrwListData: _xjrwListDataList[index]);
+              return Stack(
+                children: <Widget>[
+                  XjruListItem(
+                    xjrwListData: _xjrwListDataList[index],
+                    //检查标准
+                    onstandardTap: () {
+                    },
+                    //操作
+                    onTapoperation: (){
+                      // 开始执行动画
+                      _controller.forward(from: 0.0);
+                      setState(() {
+                        _selectIndex = index;
+                      });
+                    },
+                  ),
+                  _positionedBuild(index),
+                ],
+              );
             },
             itemCount: _xjrwListDataList.length,
           ),
@@ -157,10 +184,85 @@ class InspectionTaskListState extends State<InspectionTaskList>
     }
   }
 
+  //item点击
+  Widget _positionedBuild(index) {
+    return Positioned.fill(
+        child: Offstage(
+      offstage: _selectIndex != index,
+      child: AnimatedBuilder(
+          animation: _animation,
+          builder: (_, child) {
+            return MenuReveal(
+              revealPercent: _animation.value,
+              child: InkWell(
+                onTap: () {
+                  _controller.reverse(from: 1.1);
+                  _selectIndex = -1;
+                },
+                child: Container(
+                  color: Color(0x4D000000),
+                  child: Theme(
+                      data: Theme.of(context).copyWith(
+                          buttonTheme: ButtonThemeData(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12.0),
+                              minWidth: 56.0,
+                              height: 56.0,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              //距离顶部为0
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24.0),
+                              )),
+                          textTheme: TextTheme(
+                              button: TextStyle(
+                            fontSize: Dimens.font_sp16,
+                          ))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Gaps.hGap15,
+                          FlatButton(
+                            textColor: Colors.white,
+                            color: Colours.app_main,
+                            child: Text("通过"),
+                            onPressed: () {
+                              setState(() {
+                                _selectIndex = -1;
+                              });
+                            },
+                          ),
+                          FlatButton(
+                            color: Colors.white,
+                            child: Text("纠正"),
+                            onPressed: () {
+                              Toast.show("下架");
+                            },
+                          ),
+                          FlatButton(
+                            color: Colors.white,
+                            child: Text("整改"),
+                            onPressed: () {
+                              _controller.reverse(from: 1.1);
+                              _selectIndex = -1;
+                            },
+                          ),
+                          Gaps.hGap15,
+                        ],
+                      )),
+                ),
+              ),
+            );
+          }),
+    ));
+  }
+
   //下拉刷新数据
   _refresh() async {
     intPage = 1;
-    Request().getAjax_xjrw_zrw_list(widget.index, intPage, 2145,1244).then((data) {
+    Request()
+        .getAjax_xjrw_zrw_list(widget.index, intPage, 2145, 1244)
+        .then((data) {
       setState(() {
         //如果不足一页则下页没有数据
         _xjrwListDataList = data;
@@ -177,15 +279,16 @@ class InspectionTaskListState extends State<InspectionTaskList>
 
   //上拉加载更多数据
   _loadMore() async {
-    Request().getAjax_xjrw_zrw_list(widget.index, intPage, 2145,1244).then((data) {
+    Request()
+        .getAjax_xjrw_zrw_list(widget.index, intPage, 2145, 1244)
+        .then((data) {
       setState(() {
         //判断如果返回的数据长度没有达到达到一页则下一页没有数据
-        if(isDataEmpty){
+        if (isDataEmpty) {
           _xjrwListDataList.addAll(data);
           intPage++;
         }
         isData(data);
-
       });
     }).catchError((e) {
       Toast.show(e.message);

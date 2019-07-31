@@ -4,9 +4,12 @@ import 'package:yh_lwgl/res/colors.dart';
 import 'package:yh_lwgl/res/styles.dart';
 
 class XjruListItem extends StatelessWidget {
-  XjrwListData xjrwListData;
 
-  XjruListItem({Key key, @required this.xjrwListData}) : super(key: key);
+  XjrwListData xjrwListData;
+  final GestureTapCallback onstandardTap;
+  final GestureTapCallback onTapoperation;
+
+  XjruListItem({Key key, @required this.xjrwListData,this.onstandardTap,this.onTapoperation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +38,12 @@ class XjruListItem extends StatelessWidget {
                     xjrwListData.xjrwName ?? '-',
                     style: TextStyles.textNormal14,
                   ),
-                  Icon(
-                    Icons.error,
-                    color: Colors.blue[500],
+                  InkWell(
+                    onTap: onstandardTap,
+                    child: Icon(
+                      Icons.error,
+                      color: Colors.blue[500],
+                    ) ,
                   ),
                 ],
               ),
@@ -113,9 +119,13 @@ class XjruListItem extends StatelessWidget {
                     style: TextStyles.textNormal14,
                   ),
                   Gaps.hGap10,
-                  Icon(
-                    Icons.menu,
-                    color: Colors.blue[500],
+
+                  InkWell(
+                    onTap: onTapoperation,
+                    child:  Icon(
+                      Icons.menu,
+                      color: Colors.blue[500],
+                    ),
                   ),
                 ],
               ),

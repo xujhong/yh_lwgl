@@ -47,6 +47,8 @@ dependencies:
   flutter_spinkit: ^3.1.0
   #事件
   event_bus: ^1.0.1
+  #相册图片选择 image_picker: 0.6.0+17  https://github.com/flutter/plugins/tree/master/packages/image_picker
+  image_picker: 0.6.0+17
 
   #适量动画 https://github.com/CarSmallGuo/Flare-Flutter
   flare_flutter:
