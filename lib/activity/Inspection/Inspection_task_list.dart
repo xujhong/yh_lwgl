@@ -36,7 +36,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
   PageStatus status = PageStatus.LOADING;
 
   //请求返回的对象
-  AsyncSnapshot<List<XjrwCountData>> _slryDetailData;
+  List<XjrwCountData> _slryDetailData;
   List<XjrwListData> _xjrwListDataList = new List();
 
   //判断数据是否已经加载完成
@@ -45,6 +45,8 @@ class InspectionTaskListState extends State<InspectionTaskList>
 
   Animation<double> _animation;
   AnimationController _controller;
+  //判断数据是否加载完成
+  bool isLoading=true;
 
   @override
   void initState() {
@@ -57,8 +59,9 @@ class InspectionTaskListState extends State<InspectionTaskList>
     CurvedAnimation _curvedAnimation =
         CurvedAnimation(parent: _controller, curve: Curves.easeOutSine);
     _animation = new Tween(begin: 0.0, end: 1.1).animate(_curvedAnimation);
-
+    _countData();
     _refresh();
+
   }
 
   @override
@@ -71,27 +74,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          child: FutureBuilder<List<XjrwCountData>>(
-            future: Request().getAjax_zrw_count(2148, 1244),
-            builder: (context, AsyncSnapshot<List<XjrwCountData>> snap) {
-              if (snap.connectionState == ConnectionState.done) {
-                if (snap.hasError) {
-                  return ErrorView(
-                    onClick: () {
-                      Request().getAjax_zrw_count(2148, 1244);
-                    },
-                  );
-                }
-                //加载完成
-                _slryDetailData = snap;
-                return _buildBody();
-              } else if (snap.connectionState == ConnectionState.waiting) {
-                //加载中
-                print('waiting');
-                return Loading();
-              }
-            },
-          ),
+          child:isLoading?Loading():_buildBody()
         ),
         Gaps.vGap4,
         Expanded(
@@ -125,7 +108,7 @@ class InspectionTaskListState extends State<InspectionTaskList>
             Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 10.0),
               child: Text(
-                _slryDetailData.data[_sortIndex].zybwMc ?? '',
+                _slryDetailData[_sortIndex].zybwMc ?? '',
                 style: TextStyles.textNormal14,
               ),
             ),
@@ -257,6 +240,22 @@ class InspectionTaskListState extends State<InspectionTaskList>
     ));
   }
 
+  //加载分类数据
+  _countData() async{
+    Request()
+        .getAjax_zrw_count(2148, 1244)
+        .then((data) {
+      setState(() {
+        isLoading=!isLoading;
+        _slryDetailData = data;
+      });
+    }).catchError((e) {
+      print('错误');
+      print(e.toString());
+      Toast.show(e.message);
+    });
+  }
+
   //下拉刷新数据
   _refresh() async {
     intPage = 1;
@@ -334,9 +333,9 @@ class InspectionTaskListState extends State<InspectionTaskList>
           height: body.size.height - button.size.height - 12.0,
           child: ListView.builder(
             physics: ClampingScrollPhysics(),
-            itemCount: _slryDetailData.data.length + 1,
+            itemCount: _slryDetailData.length + 1,
             itemBuilder: (_, index) {
-              return index == _slryDetailData.data.length
+              return index == _slryDetailData.length
                   ? Container(
                       color: Colors.white,
                       height: 12.0,
@@ -351,13 +350,13 @@ class InspectionTaskListState extends State<InspectionTaskList>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                _slryDetailData.data[index].zybwMc,
+                                _slryDetailData[index].zybwMc,
                                 style: index == _sortIndex
                                     ? TextStyles.textMain14
                                     : TextStyles.textDark14,
                               ),
                               Text(
-                                "(${_slryDetailData.data[index].zrwCount})",
+                                "(${_slryDetailData[index].zrwCount})",
                                 style: index == _sortIndex
                                     ? TextStyles.textMain14
                                     : TextStyles.textDark14,
